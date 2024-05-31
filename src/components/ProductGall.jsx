@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, Paper } from '@mui/material';
 
 const images = [
@@ -9,15 +9,24 @@ const images = [
 ];
 
 const ProductoGall = () => {
+  const [imagenPrincipal, setImagenPrincipal] = useState(images[0]); 
+  const cambiarImagenPrincipal = (image) => {
+    setImagenPrincipal(image);
+  };
+
   return (
     <Box>
       <Paper elevation={3} style={{ borderRadius: '16px', overflow: 'hidden' }}>
-        <img src="/image-product-1.jpg" alt="Main Product" style={{ width: '100%' }} />
+        <img src={imagenPrincipal} alt="Main Product" style={{ width: '100%' }} />
       </Paper>
       <Grid container spacing={2} mt={2}>
         {images.map((image, index) => (
           <Grid item xs={3} key={index}>
-            <Paper elevation={3} style={{ borderRadius: '16px', overflow: 'hidden' }}>
+            <Paper
+              elevation={3}
+              style={{ borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }}
+              onClick={() => cambiarImagenPrincipal(image)}
+            >
               <img src={image} alt={`Product ${index + 1}`} style={{ width: '100%' }} />
             </Paper>
           </Grid>
